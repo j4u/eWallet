@@ -22,6 +22,12 @@ public class TextField extends TextBox{
 		}
 	}
 	
+	public void setRequired(Boolean isRequired){
+		if(isRequired){
+			getElement().setAttribute("required", "required");
+		}
+	}
+	
 	public void setAutoComplete(boolean autocomplete){
 		if(autocomplete){
 			getElement().setAttribute("autocomplete", "on");

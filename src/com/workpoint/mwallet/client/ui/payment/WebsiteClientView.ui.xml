@@ -6,6 +6,19 @@
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel>
+		<div>
+			<nav class="navbar">
+				<div class="container">
+					<div class="navbar-header" style="width: 100%; text-align: center;">
+						<a href="#" class="brand">
+							<img src="http://solutech.co.ke/icpak//assets/img/logo.png"
+								width="150px" />
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+
 		<div class="image-container set-full-height">
 			<div class="container">
 				<div class="row">
@@ -15,7 +28,7 @@
 							<div class="card wizard-card ct-wizard-green">
 								<div class="wizard-header">
 									<h3>
-										Empire Wifi Payments
+										Member Registration Form
 										<br />
 									</h3>
 								</div>
@@ -23,13 +36,13 @@
 								<ul class="nav nav-pills">
 									<li class="active" style="width: 33.3333333333333%;"
 										ui:field="liPackage">
-										<a href="#package" data-toggle="tab">1 - Package Info</a>
+										<a>1 - Personal Information</a>
 									</li>
 									<li style="width: 33.3333333333333%;" ui:field="liPayment">
-										<a href="#payment" data-toggle="tab">2 - Payment</a>
+										<a>2 - Make Payment</a>
 									</li>
 									<li style="width: 33.3333333333333%;" ui:field="liComplete">
-										<a href="#complete" data-toggle="tab">3 - Complete</a>
+										<a>3 - Complete</a>
 									</li>
 								</ul>
 
@@ -37,53 +50,96 @@
 								<div class="tab-content">
 									<div class="tab-pane active" ui:field="divPackage">
 										<div class="row">
+
 											<div class="col-sm-12">
 												<h4 class="info-text">Fill In Below Details:</h4>
+												<hr />
 											</div>
 
-											<div class="col-md-12">
-												<hr />
-												<form class="form-horizontal">
-													<div class="form-group">
-														<label for="lastname" class="col-sm-6 control-label">Account Number:</label>
-														<div class="col-sm-6">
-															<g:TextBox ui:field="txtAccount" styleName="form-control"></g:TextBox>
-														</div>
+											<div class="col-sm-12">
+												<div class="row">
+													<div class="col-xs-6">
+														<label for="firstname">Surname</label>
+														<d:TextField ui:field="surname" styleName="form-control"
+															placeholder="Enter Surname" value="" required="true">
+														</d:TextField>
 													</div>
-
-													<div class="form-group">
-														<label for="firstname" class="col-sm-6 control-label">Select Package:</label>
-														<div class="col-sm-6">
-															<d:DropDownList ui:field="lstPackages">
-															</d:DropDownList>
-														</div>
+													<div class="col-xs-6">
+														<label for="lastname">Other Name</label>
+														<d:TextField ui:field="other_names" styleName="form-control"
+															placeholder="Enter Other Name" value="" required="true">
+														</d:TextField>
 													</div>
+												</div>
 
-													<div class="form-group">
-														<label for="lastname" class="col-sm-6 control-label">Months:</label>
-														<div class="col-sm-6">
-															<g:TextBox ui:field="txtMonth" styleName="form-control"></g:TextBox>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label for="lastname" class="col-sm-6 control-label">Amount:</label>
+												<div class="form-group">
+													<div class="row">
 														<div class="col-xs-6">
-															<g:TextBox ui:field="txtAmount" styleName="form-control"></g:TextBox>
+															<label for="emailaddress">Email Address</label>
+															<d:TextField ui:field="email_address"
+																styleName="form-control" placeholder="Email address"
+																value="" required="true">
+															</d:TextField>
+														</div>
+
+														<div class="col-xs-6">
+															<label>Category:</label>
+															<d:DropDownList ui:field="lstMemberCategory"></d:DropDownList>
 														</div>
 													</div>
-												</form>
+												</div>
+
+
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-6">
+															<label for="emailaddress">Employer Name</label>
+															<d:TextField ui:field="employer" styleName="form-control"
+																placeholder="Enter Employer's Name" value="" required="true">
+															</d:TextField>
+														</div>
+
+														<div class="col-xs-6">
+															<label for="applicationCategory">Town/City</label>
+
+															<d:TextField ui:field="city" styleName="form-control"
+																placeholder="Enter Town/City" value="" required="true">
+															</d:TextField>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-6">
+															<label for="emailaddress">Address</label>
+															<d:TextField ui:field="address" styleName="form-control"
+																placeholder="Enter Address" value="" required="true">
+															</d:TextField>
+														</div>
+
+														<div class="col-xs-6">
+															<label for="applicationCategory">Postal Code</label>
+
+															<d:TextField ui:field="postal_code"
+																styleName="form-control" placeholder="Enter Postal Code"
+																value="" required="true">
+															</d:TextField>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 
 									<div class="tab-pane" ui:field="divPayment">
 										<div class="row">
-											<div class="col-sm-12">
+											<div class="col-sm-12 hide">
 												<h4 class="info-text">Submit Payment:</h4>
 											</div>
 											<div class="col-md-12">
-												<g:Frame ui:field="framePayment" height="100%" width="100%"></g:Frame>
+												<g:Frame ui:field="framePayment" height="590px"
+													width="100%"></g:Frame>
 											</div>
 										</div>
 									</div>
@@ -94,7 +150,7 @@
 												<h4 class="info-text">Status:</h4>
 											</div>
 
-											<div class="alert alert-danger" role="alert">
+											<div class="alert alert-success" role="alert">
 												Your payment has
 												successfully been received!
 											</div>
@@ -122,6 +178,12 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="container">
+				<footer>Copyright ICPAK 2015</footer>
 			</div>
 		</div>
 	</g:HTMLPanel>

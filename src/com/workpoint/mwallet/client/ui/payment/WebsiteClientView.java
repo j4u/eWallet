@@ -17,6 +17,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
+import com.workpoint.mwallet.client.ui.component.DropDownList;
+import com.workpoint.mwallet.client.ui.component.TextField;
 
 public class WebsiteClientView extends ViewImpl implements
 		WebsiteClientPresenter.MyView {
@@ -46,7 +48,23 @@ public class WebsiteClientView extends ViewImpl implements
 	LIElement liComplete;
 
 	@UiField
-	TextBox txtAmount;
+	TextField surname;
+	@UiField
+	TextField other_names;
+	@UiField
+	TextField email_address;
+	
+	// @UiField
+	// DropDownList<> lstMemberCategory;
+
+	@UiField
+	TextField employer;
+	@UiField
+	TextField city;
+	@UiField
+	TextField address;
+	@UiField
+	TextField postal_code;
 
 	private List<LIElement> liElements = new ArrayList<LIElement>();
 	private List<DivElement> divElements = new ArrayList<DivElement>();
@@ -60,11 +78,9 @@ public class WebsiteClientView extends ViewImpl implements
 	public WebsiteClientView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
 
-		txtAmount.getElement().setAttribute("disabled", "");
-
 		String url = "http://197.248.2.44:8080/ewallet-beta/#websiteClient";
 		framePayment.setUrl(url);
-
+		
 		// Li Elements
 		liElements.add(liPackage);
 		liElements.add(liPayment);
@@ -80,7 +96,7 @@ public class WebsiteClientView extends ViewImpl implements
 		aBack.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				counter--;
+				counter = counter--;
 				removeActive(liElements.get(counter), divElements.get(counter));
 				setActive(liElements.get(counter), divElements.get(counter));
 			}
@@ -89,7 +105,7 @@ public class WebsiteClientView extends ViewImpl implements
 		aNext.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				counter++;
+				counter = counter++;
 				setActive(liElements.get(counter), divElements.get(counter));
 			}
 		});
@@ -102,6 +118,9 @@ public class WebsiteClientView extends ViewImpl implements
 	}
 
 	private void setActive(LIElement liElement, DivElement divElement) {
+		if(counter==0){
+			aBack.setVisible(false);
+		}
 		clearAll();
 		liElement.addClassName("active");
 		divElement.addClassName("active");
