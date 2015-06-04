@@ -3,115 +3,127 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
 	ui:generateKeys='com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator'
 	xmlns:d='urn:import:com.workpoint.mwallet.client.ui.component' xmlns:m="urn:import:gwt.material.design.client.ui"
-	xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
 	ui:generateLocales='default'>
 
 	<g:HTMLPanel>
+		<div class="image-container set-full-height">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<!-- Wizard container -->
+						<div class="wizard-container">
+							<div class="card wizard-card ct-wizard-green">
+								<div class="wizard-header">
+									<h3>
+										Empire Wifi Payments
+										<br />
+									</h3>
+								</div>
 
-		<m:MaterialRow>
-			<m:MaterialTabs color="blue" textColor="white"
-				indicatorColor="yellow" waves="yellow">
-				<m:tab>
-					<g:Image url="img/Mpesa_Logo.png"></g:Image>
-				</m:tab>
-				<m:tab>
-					<g:Image url="img/Visa_Logo.png" />
-				</m:tab>
-				<m:tab>
-					<g:Image url="img/Mastercard_Logo.png" />
-				</m:tab>
-				<m:content>
-					<!-- <m:MaterialTopNav padding="5" title="Sample 1" -->
-					<!-- description="This is sample 1" color="blue" textColor="white" /> -->
-
-					<g:HTMLPanel>
-						<m:MaterialRow>
-							<m:MaterialColumn grid="s6" addStyleNames="myColumn">
-								<h5>
-									<g:InlineLabel>A: Payment Instructions</g:InlineLabel>
-								</h5>
-								<ul>
-									<li>
-										1. Go to
-										<Strong>M-PESA</Strong>
-										option on your phone
+								<ul class="nav nav-pills">
+									<li class="active" style="width: 33.3333333333333%;"
+										ui:field="liPackage">
+										<a href="#package" data-toggle="tab">1 - Package Info</a>
 									</li>
-									<li>
-										2. Select the
-										<Strong>Lipa Na M-PESA</Strong>
+									<li style="width: 33.3333333333333%;" ui:field="liPayment">
+										<a href="#payment" data-toggle="tab">2 - Payment</a>
 									</li>
-									<li>
-										3. Select
-										<strong ui:field="spnServiceLabel">Buy Goods and Services</strong>
-										option
-									</li>
-									<li>
-										4. Enter
-										<g:InlineLabel ui:field="spnBusinessLabel">Business number</g:InlineLabel>
-										<strong ui:field="spnBusinessNo">220220</strong>
-									</li>
-									<li ui:field="spnAccountNo">
-										5. Enter Account no.
-										<strong>ICPAK34567</strong>
-									</li>
-									<li>
-										6. Enter the Amount KES
-										<strong ui:field="spnAmount">Ksh. 2,500/=</strong>
-									</li>
-									<li>
-										7. Enter your M-PESA PIN and Press Send
-									</li>
-									<li>8. You will receive a confirmation SMS from M-PESA with a
-										Confirmation
-										Code</li>
-								</ul>
-							</m:MaterialColumn>
-						</m:MaterialRow>
-
-						<m:MaterialRow ui:field="myRow">
-							<m:MaterialColumn grid="s6" addStyleNames="myColumn">
-								<h5>
-									<g:InlineLabel>B:Verification</g:InlineLabel>
-								</h5>
-
-								<ul>
-									<li>
-										1. You will receive a confirmation SMS on your mobile number
-										from
-										<Strong ui:field="spnOrgName">
-											ICPAK.
-										</Strong>
-										containing a 5-digit code.
-									</li>
-									<li>
-										2. Enter the verification code in the textBox
-										below and Press
-										the
-										<strong>Complete Button</strong>
-										.
+									<li style="width: 33.3333333333333%;" ui:field="liComplete">
+										<a href="#complete" data-toggle="tab">3 - Complete</a>
 									</li>
 								</ul>
-								<m:MaterialTextBox placeholder="Verification Code"
-									ui:field="txtVerification"/>
-								<b:Button text="Complete" ui:field="btnComplete" type="PRIMARY"> </b:Button>
 
-								<!-- <m:MaterialButton text="Re-send" waves="light" ui:field="btnResend" 
-									color="grey" /> -->
-							</m:MaterialColumn>
-						</m:MaterialRow>
-					</g:HTMLPanel>
-				</m:content>
-				<m:content>
-					<m:MaterialTopNav padding="5" title="VISA Payments"
-						description="Stay Tuned. Coming Soon" color="green" textColor="white" />
-				</m:content>
-				<m:content>
-					<m:MaterialTopNav padding="5" title="MasterCard Payments"
-						description="Stay Tuned. Content Coming Soon" color="green"
-						textColor="white" />
-				</m:content>
-			</m:MaterialTabs>
-		</m:MaterialRow>
+								<!-- Tab Content 1 -->
+								<div class="tab-content">
+									<div class="tab-pane active" ui:field="divPackage">
+										<div class="row">
+											<div class="col-sm-12">
+												<h4 class="info-text">Fill In Below Details:</h4>
+											</div>
+
+											<div class="col-md-12">
+												<hr />
+												<form class="form-horizontal">
+													<div class="form-group">
+														<label for="lastname" class="col-sm-6 control-label">Account Number:</label>
+														<div class="col-sm-6">
+															<g:TextBox ui:field="txtAccount" styleName="form-control"></g:TextBox>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="firstname" class="col-sm-6 control-label">Select Package:</label>
+														<div class="col-sm-6">
+															<d:DropDownList ui:field="lstPackages">
+															</d:DropDownList>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="lastname" class="col-sm-6 control-label">Months:</label>
+														<div class="col-sm-6">
+															<g:TextBox ui:field="txtMonth" styleName="form-control"></g:TextBox>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="lastname" class="col-sm-6 control-label">Amount:</label>
+														<div class="col-xs-6">
+															<g:TextBox ui:field="txtAmount" styleName="form-control"></g:TextBox>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane" ui:field="divPayment">
+										<div class="row">
+											<div class="col-sm-12">
+												<h4 class="info-text">Submit Payment:</h4>
+											</div>
+											<div class="col-md-12">
+												<g:Frame ui:field="framePayment" height="100%" width="100%"></g:Frame>
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane" ui:field="divComplete">
+										<div class="row">
+											<div class="col-sm-12">
+												<h4 class="info-text">Status:</h4>
+											</div>
+
+											<div class="alert alert-danger" role="alert">
+												Your payment has
+												successfully been received!
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="wizard-footer">
+									<div class="pull-right">
+										<g:Anchor
+											styleName='btn btn-next btn-fill btn-success btn-wd
+										btn-sm'
+											ui:field="aNext">Proceed
+										</g:Anchor>
+									</div>
+									<div class="pull-left">
+										<g:Anchor
+											styleName='btn btn-previous btn-fill btn-default btn-wd btn-sm'
+											ui:field="aBack">Back
+										</g:Anchor>
+									</div>
+
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</g:HTMLPanel>
 
 </ui:UiBinder>

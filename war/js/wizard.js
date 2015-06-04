@@ -4,8 +4,7 @@ transparent = true;
 $(document).ready(function(){
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
-    
-        
+   
     $('#wizard').bootstrapWizard({
         'tabClass': 'nav nav-pills',
         'nextSelector': '.btn-next',

@@ -1,15 +1,19 @@
 package com.workpoint.mwallet.client.ui.payment;
 
-import gwt.material.design.client.ui.MaterialRow;
-import gwt.material.design.client.ui.MaterialTextBox;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.github.gwtbootstrap.client.ui.Button;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.LIElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.InlineLabel;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -18,25 +22,36 @@ public class WebsiteClientView extends ViewImpl implements
 		WebsiteClientPresenter.MyView {
 
 	private final Widget widget;
+
 	@UiField
-	Button btnComplete;
+	Frame framePayment;
+
 	@UiField
-	Element spnServiceLabel;
+	Anchor aNext;
 	@UiField
-	InlineLabel spnBusinessLabel;
+	Anchor aBack;
+
 	@UiField
-	Element spnBusinessNo;
+	DivElement divPackage;
 	@UiField
-	Element spnAccountNo;
+	DivElement divPayment;
 	@UiField
-	Element spnOrgName;
+	DivElement divComplete;
+
 	@UiField
-	Element spnAmount;
-	
-	@UiField 
-	MaterialTextBox txtVerification;
-	
-	@UiField MaterialRow myRow;
+	LIElement liPackage;
+	@UiField
+	LIElement liPayment;
+	@UiField
+	LIElement liComplete;
+
+	@UiField
+	TextBox txtAmount;
+
+	private List<LIElement> liElements = new ArrayList<LIElement>();
+	private List<DivElement> divElements = new ArrayList<DivElement>();
+
+	int counter = 0;
 
 	public interface Binder extends UiBinder<Widget, WebsiteClientView> {
 	}
@@ -44,8 +59,63 @@ public class WebsiteClientView extends ViewImpl implements
 	@Inject
 	public WebsiteClientView(final Binder binder) {
 		widget = binder.createAndBindUi(this);
-		txtVerification.addStyleName("mytext-field");
-		myRow.addStyleName("my-row");
+
+		txtAmount.getElement().setAttribute("disabled", "");
+
+		String url = "http://197.248.2.44:8080/ewallet-beta/#websiteClient";
+		framePayment.setUrl(url);
+
+		// Li Elements
+		liElements.add(liPackage);
+		liElements.add(liPayment);
+		liElements.add(liComplete);
+
+		// Div Elements
+		divElements.add(divPackage);
+		divElements.add(divPayment);
+		divElements.add(divComplete);
+
+		setActive(liElements.get(counter), divElements.get(counter));
+
+		aBack.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				counter--;
+				removeActive(liElements.get(counter), divElements.get(counter));
+				setActive(liElements.get(counter), divElements.get(counter));
+			}
+		});
+
+		aNext.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				counter++;
+				setActive(liElements.get(counter), divElements.get(counter));
+			}
+		});
+	}
+
+	private void removeActive(LIElement liElement, DivElement divElement) {
+		liElement.removeClassName("active");
+		divElement.removeClassName("active");
+		System.err.println("Removed:" + counter);
+	}
+
+	private void setActive(LIElement liElement, DivElement divElement) {
+		clearAll();
+		liElement.addClassName("active");
+		divElement.addClassName("active");
+		System.err.println("Added:" + counter);
+	}
+
+	private void clearAll() {
+		liPackage.removeClassName("active");
+		liPayment.removeClassName("active");
+		liComplete.removeClassName("active");
+
+		divPackage.removeClassName("active");
+		divPayment.removeClassName("active");
+		divComplete.removeClassName("active");
 	}
 
 	@Override
@@ -54,38 +124,7 @@ public class WebsiteClientView extends ViewImpl implements
 	}
 
 	@Override
-	public void setParameters(String businessNo, String accountNo,
-			String amount, String orgName) {
+	public void createWizard() {
 
-		spnBusinessNo.setInnerText(businessNo);
-		spnOrgName.setInnerText(orgName);
-
-		if (!amount.isEmpty()) {
-			spnAmount.setInnerHTML(NumberFormat.getCurrencyFormat("KES")
-					.format(Double.valueOf(amount)));
-		}
-
-		if (accountNo != null && accountNo.equals("Null")) {
-			spnServiceLabel.setInnerText("Buy Goods and Service");
-			spnAccountNo.removeFromParent();
-			spnBusinessLabel.getElement().setInnerHTML("Till Number");
-		} else {
-			spnServiceLabel.setInnerText("Pay Bill");
-			spnBusinessLabel.getElement().setInnerHTML("Paybill Number");
-			spnAccountNo.setInnerHTML("5. Enter Account Number:" + accountNo);
-		}
 	}
-	
-	@Override
-	public HasClickHandlers getCompleteButton(){
-		return btnComplete;
-	}
-	
-	public String getVerification(){
-		if(!txtVerification.getText().isEmpty()){
-			return txtVerification.getText();
-		}
-		return null;
-	}
-
 }
