@@ -96,7 +96,7 @@ public class WebsiteClientView extends ViewImpl implements
 		aBack.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				counter = counter--;
+				counter = counter-1;
 				removeActive(liElements.get(counter), divElements.get(counter));
 				setActive(liElements.get(counter), divElements.get(counter));
 			}
@@ -105,7 +105,7 @@ public class WebsiteClientView extends ViewImpl implements
 		aNext.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				counter = counter++;
+				counter = counter+1;
 				setActive(liElements.get(counter), divElements.get(counter));
 			}
 		});
